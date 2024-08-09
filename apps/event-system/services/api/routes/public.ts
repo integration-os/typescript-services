@@ -4,6 +4,8 @@ const {
 import { checkBlacklist } from '@libs-private/utils/security';
 
 import { get } from 'lodash';
+import { IncomingMessage } from 'http';
+
 
 export const publicRoute = () => ({
   name: 'public',
@@ -24,7 +26,8 @@ export const publicRoute = () => ({
     'v1.embed-tokens.public.get',
     'v1.embed-tokens.public.update',
 
-    'v1.connection-testing.public.testConnectionModel'
+    'v1.connection-testing.public.testConnectionModel',
+    'v1.stripe-webhook.handleWebhook',
   ],
 
   aliases: {
@@ -49,6 +52,8 @@ export const publicRoute = () => ({
 
     'POST v1/embed-tokens/get': 'v1.embed-tokens.public.get',
     'POST v1/embed-tokens/update': 'v1.embed-tokens.public.update',
+    'POST v1/stripe-webhook': 'v1.stripe-webhook.handleWebhook'
+
   },
 
   cors: {
@@ -111,11 +116,17 @@ export const publicRoute = () => ({
     json: {
       strict: false,
       limit: '5MB',
+      verify: (req: IncomingMessage, res: any, buf: Buffer, encoding: string | undefined) => {
+        if (req.url === '/v1/stripe-webhook') {
+          const validEncoding: BufferEncoding = encoding as BufferEncoding || 'utf8';
+          (req as any).rawBody = buf.toString(validEncoding);
+        }
+      },
     },
     urlencoded: {
       extended: true,
       limit: '1MB',
-    },
+    }
   },
 
   // Mapping policy setting. More info: https://moleculer.services/docs/0.14/moleculer-web.html#Mapping-policy

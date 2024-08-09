@@ -19,10 +19,22 @@ export const internalRoute = () => ({
 
     'v1.settings.public.create',
     'v1.settings.public.get',
+
+    'v1.stripe.public.createCustomer',
+    'v1.stripe.public.getSubscription',
+    'v1.stripe.public.getProduct',
+    'v1.stripe.public.createBillingPortalSession',
+    'v1.stripe.public.listPaymentMethods',
+    'v1.stripe.public.listInvoices',
+    'v1.clients.get',
+    'v1.clients.update',
   ],
   aliases: {
     'POST v3/users/get': 'v3.users.getUserFromToken',
     'GET v3/users/get': 'v3.users.getUserFromToken',
+
+    'POST v1/clients/get': 'v1.clients.get', 
+    'POST v1/clients/update': 'v1.clients.update',
 
     'POST v3/users/update': 'v3.users.updateUserFromToken',
     'GET v3/users/update': 'v3.users.updateUserFromToken',
@@ -36,6 +48,15 @@ export const internalRoute = () => ({
     // Settings
     'POST v1/settings/create': 'v1.settings.public.create',
     'POST v1/settings/get': 'v1.settings.public.get',
+
+    // Stripe
+    'POST v1/stripe/create-customer': 'v1.stripe.public.createCustomer',
+    'POST v1/stripe/get-subscription': 'v1.stripe.public.getSubscription',
+    'POST v1/stripe/get-product': 'v1.stripe.public.getProduct',
+    'POST v1/stripe/create-billing-portal-session': 'v1.stripe.public.createBillingPortalSession',
+    'POST v1/stripe/list-payment-methods': 'v1.stripe.public.listPaymentMethods',
+    'POST v1/stripe/list-invoices': 'v1.stripe.public.listInvoices',
+
   },
   cors: {
     origin: '*', //corsOk,

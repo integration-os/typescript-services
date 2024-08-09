@@ -6,6 +6,7 @@ export const Services = {
   EventAccessV1: 'v1.event-access',
   Links: 'v1.links',
   EventLinks: 'v1.event-links',
+  Stripe: 'v1.stripe',
   EmbedTokens: 'v1.embed-tokens',
   Clients: 'v1.clients',
   ConnectionOAuth: 'v1.connections-oauth',
